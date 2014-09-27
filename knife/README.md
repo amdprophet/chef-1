@@ -5,11 +5,15 @@ chef/knife
 distros to install Chef via ruby gems. In particular I use these for:
 
 * Raspbian for Raspberry Pi
+
 Debian 7 'wheezy' for ARM
+
 http://www.raspbian.org/
 
 * EdgeOS for Ubiquiti EdgeRouter POE, EdgeRouter Lite
+
 Based on Debian 6 'squeeze'
+
 http://www.ubnt.com/edgemax/edgerouter-lite/
 
 

@@ -24,7 +24,7 @@ gem update --no-rdoc --no-ri
 gem install ohai --no-rdoc --no-ri --verbose
 gem install chef --no-rdoc --no-ri --verbose <%= bootstrap_version_string %>
 
-<%# CHANGEME %>
+<%# XXX:CHANGEME %>
 echo "192.168.1.5 chef.example.com chef" >> /etc/hosts
 
 mkdir -p /etc/chef
@@ -45,6 +45,7 @@ EOP
 <% end -%>
 <% end -%>
 
+<%# Run chef-client from cron every 15 minutes with a 10 minute splay %>
 cat > /etc/cron.d/chef_run << 'EOP'
 */15 * * * * root /usr/bin/find /var/chef -maxdepth 1 -name cron.default.override -mmin +30 -exec /bin/rm -f {} \;
 #MAILTO=""
