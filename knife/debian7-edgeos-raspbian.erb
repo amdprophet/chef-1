@@ -6,6 +6,7 @@ if [ -f /usr/bin/chef-client ]; then
 else
   tmp_dir=$(mktemp -d) || exit 1
 
+  <%# Make sure /etc/apt/sources.list reflects correct repo, e.g. wheezy instead of squeeze %>
   apt-get update
   apt-get install -y ruby ruby-dev ruby1.9.1-dev build-essential git
   apt-get install -y ca-certificates wget
@@ -21,11 +22,13 @@ else
 fi
 
 gem update --no-rdoc --no-ri
-gem install ohai --no-rdoc --no-ri --verbose
-gem install chef --no-rdoc --no-ri --verbose <%= bootstrap_version_string %>
+# Chef 12 support depends on Ruby 2.0, not available until "jessie"
+gem install ohai --no-rdoc --no-ri --verbose -v 7.6.0
+gem install chef --no-rdoc --no-ri --verbose -v 11.18.12
 
 <%# XXX:CHANGEME %>
 echo "192.168.1.5 chef.example.com chef" >> /etc/hosts
+echo "2620::2:beef:fe1e:1264 chef.example.com chef" >> /etc/hosts
 
 mkdir -p /etc/chef
 
